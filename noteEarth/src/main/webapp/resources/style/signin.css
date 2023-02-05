@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+
+.SignInForm_Wrap{
+	vertical-align:middle; 
+	position: absolute;
+    top: 20%;
+    left: 38%;
+    width: 22%;
+}
+.SignInForm_Wrap>.SignInForm{
+	min-width:390px;
+	min-height:326px;
+}
+
+.SignInForm_Wrap>.SignInForm .form-floating label{
+	color: darkgrey;
+}
+
+.SignInForm_Wrap>.SignInForm input[type=email],
+.SignInForm_Wrap>.SignInForm input[type=password]{
+	margin-bottom:10px;
+}
+
+#SignUpBtn{
+	background: #eed8dc;
+	margin:15px 0;
+}
+.SignInForm_Wrap>.SignInForm .SnsWrap{
+	justify-content: center;
+}
+.SignInForm_Wrap>.SignInForm .SnsWrap img{
+	margin: 0 11px;
+	cursor:pointer;
+}
+.SignInForm_Wrap>.SignInForm .SnsWrap img:hover{
+	transform:scale(1.1);
+}
+
+/* 회원가입 모달 */
+#exampleInputPassword1{margin-top:-6px;}
+
+#CheckEmailBtn{
+	margin-right: 10px;
+}    
+
+

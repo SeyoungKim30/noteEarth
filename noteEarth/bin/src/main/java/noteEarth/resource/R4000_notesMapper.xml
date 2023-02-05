@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+
+
+<mapper namespace="noteEarth.dao.R4000_notesDao">
+	<select id="createNotesSeq" resultType="String">
+		SELECT to_char(sysdate,'YYYYMMDDHH24MISS')||notesSeq.nextval FROM dual
+	</select>
+	
+	<insert id="insertNotes" parameterType="Notes">
+		INSERT INTO notes values(#{noteCode},#{email},#{noteTitle})
+	</insert>
+	
+	
+	<select id="createPagesSeq" resultType="String">
+		SELECT to_char(sysdate,'YYYYMMDDHH24MISS')||pagesSeq.nextval FROM dual
+	</select>
+	
+	<insert id="insertPages" parameterType="pages">
+		INSERT INTO pages values(#{pageCode},#{noteCode},#{tempCode},#{mainHTML},#{pageIndex})
+	</insert>
+	
+	<select id="selectNotes" parameterType="notes" resultType="notes">
+		SELECT n.* , totalPageCount FROM notes n,
+			(SELECT max(pageIndex) totalPageCount FROM pages WHERE 
+				<if test='noteCode != null'>
+				notecode= #{noteCode} and
+				</if>
+				<if test='email != null'>
+				email= #{email} and
+				</if>
+				<if test='noteTitle != null'>
+				noteTitle= #{noteTitle} and
+				</if>
+			1=1
+			 ) lp
+		WHERE 
+			<if test='noteCode != null'>
+			notecode= #{noteCode} and
+			</if>
+			<if test='email != null'>
+			email= #{email} and
+			</if>
+			<if test='noteTitle != null'>
+			noteTitle= #{noteTitle} and
+			</if>
+			1=1
+	</select>
+	
+	<select id="selectPages" parameterType="pages" resultType="pages">
+		SELECT * FROM pages WHERE 
+		<if test='noteCode!=null'>
+		notecode= #{noteCode} AND 
+		</if>
+		<if test='pageIndex!=0'>
+		pageIndex = #{pageIndex} and
+		</if>
+		<if test='pageCode!=null'>
+		pageCode = #{pageCode} and
+		</if>
+		1=1
+	</select>
+	
+	<update id="updatePageMainHTML" parameterType="pages">
+	update pages set mainHTML = #{mainHTML} where pageCode = #{pageCode}
+	</update>
+
+<delete id="deletePages" parameterType="pages">
+	delete from Pages where 
+		<if test='noteCode!=null'>
+		notecode= #{noteCode} AND 
+		</if>
+		<if test='pageIndex!=0'>
+		pageIndex = #{pageIndex} and
+		</if>
+		<if test='pageCode!=null'>
+		pageCode = #{pageCode} and
+		</if>
+	1=1
+</delete>	
+
+<update id="add1intoPageIndexAfterThisPage"  parameterType="pages">
+	UPDATE pages SET PAGEINDEX =PAGEINDEX +1 WHERE notecode=#{noteCode} AND PAGEINDEX >= #{pageIndex}
+</update>
+
+<update id="reduce1intoPageIndexAfterdeletedPage" parameterType="pages">
+UPDATE pages SET PAGEINDEX = PAGEINDEX -1 WHERE NOTECODE = #{noteCode} AND PAGEINDEX > #{pageIndex}
+</update>
+</mapper>

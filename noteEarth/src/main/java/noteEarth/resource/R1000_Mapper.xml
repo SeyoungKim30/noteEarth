@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+   
+   <!-- 
+   //springweb.a05_mvc.a03_dao. A01_EmpDao
+	//public List<Emp> getEmpList(Emp sch);
+	
+	인터페이스를 상속받은 실제 Dao객체를 위 규칙에 생성하는 xml파일
+    -->
+    
+    <mapper namespace="noteEarth.dao.A1000_Dao">
+    	<select id="NE_CheckMem" resultType="member" parameterType="member">
+    		SELECT * FROM n_e_member WHERE name=#{name} AND rrn=#{rrn}
+    	</select>
+    	<select id="NE_CheckEmail" resultType="member" parameterType="member">
+    		SELECT * FROM n_e_member WHERE (email||kakaoemail||googleemail) like '%'||#{email}||'%'
+    	</select>
+    	
+    	<select id="NE_CheckKEmail" resultType="member" parameterType="member">
+    		SELECT email,kakaoemail,googleemail FROM n_e_member WHERE (email || kakaoemail || googleemail) like '%'||#{snsemail}||'%' 
+    	</select>
+    	
+    	<insert id="NE_SignUp" parameterType="member">
+    		INSERT INTO n_e_member VALUES('mem-'||n_e_member_seq.nextval,#{email},#{name},#{rrn},#{password},null,null)
+    	</insert>
+    	
+    	
+    	
+    	
+    	<select id="NE_Login" resultType="member" parameterType="member">
+    		select * from n_e_member 
+			where (email || kakaoemail || googleemail) LIKE '%'||#{email}||'%'
+			<if test="snsemail!=null">
+			OR (email || kakaoemail || googleemail) LIKE '%'||#{snsemail}||'%'
+			</if>
+			<if test="password!=null">
+			and password=#{password}
+			</if>
+    	</select>
+    	
+    	
+    	<!-- sns로그인시도시 연동추가 -->
+    	<update id="NE_SnsEmailPlus" parameterType="member">
+    		UPDATE N_E_MEMBER
+    		<if test="kakaoemail!=null">
+    		SET kakaoemail = #{kakaoemail}
+    		WHERE email = #{kakaoemail}
+    		</if>
+			<if test="googleemail!=null">
+			SET googleemail = #{googleemail}
+    		WHERE email = #{googleemail}
+			</if>		
+    	</update>
+    	
+    	<!-- 유저정보 수정하기 -->
+    	<update id="NE_UpdateInfo" parameterType="member">
+    		update N_E_MEMBER
+    		set email = #{email},
+    		 password = #{password}
+    		where name=#{name} and rrn=#{rrn}
+    		    
+    	</update>
+    </mapper>
