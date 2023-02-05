@@ -36,7 +36,9 @@
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 	    	<a class="dropdown-item" href="${noteEarthurl }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a>
 	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addPageModal" id="addNewNoteBtn">다른 템플릿으로 새 페이지 생성 </a>
+	    	<c:if test="${notes.totalPageCount>1 }">
 	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delPageModal">지금 페이지 삭제</a>
+	    	</c:if>
 		</div>
 		</c:if>
 </div>

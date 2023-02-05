@@ -59,7 +59,9 @@ public class R4000_Service {
 		//뒤에 페이지들 앞으로 땡기기
 		dao4000.reduce1intoPageIndexAfterdeletedPage(pages);
 		//삭제한 페이지의 앞장 페이지로 이동할 수 있게 불러와서 리턴
-		pages.setPageIndex(pages.getPageIndex()-1);
+		if(pages.getPageIndex()!=1) {
+			pages.setPageIndex(pages.getPageIndex()-1);
+		}
 		pages.setPageCode(null);
 		return dao4000.selectPages(pages);
 	}

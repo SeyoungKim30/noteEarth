@@ -15,8 +15,9 @@
 	margin:0.5em;
 	min-width: 10em;
 }
-.card:hover{
-border:2px black solid}
+div.card:hover{
+	color:white;
+	font-weight: bold;}
 </style>
 
 <script>
@@ -42,13 +43,22 @@ $(function() {
 <div class="cardDeck justify-content-center row row-cols-1 row-cols-sm-3 row-cols-lg-4 ">
 
 <c:forEach items="${noteList }" var="each">
-<div class="d-flex card col border-0" id="${each.noteCode }" style="cursor:pointer;" onclick="location.href='/noteEarth/openNote.do?noteCode=${each.noteCode }&pageIndex=1'">
-  <div class="card-body">
+<div class="d-flex card col border-0" id="${each.noteCode }">
+  <div class="card-body" style="cursor:pointer;" onclick="location.href='/noteEarth/openNote.do?noteCode=${each.noteCode }&pageIndex=1'">
     <h5 class="card-title">${each.noteTitle }</h5>
     <p class="card-text" >
     ${fn:substring(each.noteCode,0,4) }/${fn:substring(each.noteCode,4,6) }/${fn:substring(each.noteCode,6,8) }
     </p>
-  </div>
+    </div>
+  <div class="text-end" >
+  <span class="badge rounded-pill text-bg-secondary text-end" data-bs-toggle="dropdown">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path></svg>
+  </span>
+		    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="#">공유하기</a>
+			<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delNoteModal">노트삭제</a>
+			</div>    
+	</div> 		
 </div>
 </c:forEach>
 
