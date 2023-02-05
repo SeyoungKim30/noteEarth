@@ -1,5 +1,4 @@
-var TopHighVal = $('header').outerHeight(true); //Top의 높이만큼 제거
-$('body').css("padding-top",TopHighVal);	
+
 
 //회원정보창
 	$(document).ready(function(){
