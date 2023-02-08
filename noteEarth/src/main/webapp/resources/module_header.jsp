@@ -31,7 +31,7 @@
 
 <c:if test="${not empty notes }">
 <div class="center">
-	<h4 class="dropdown-toggle dropdown" data-bs-toggle="dropdown" aria-expanded="false">${notes.noteTitle}</h4>
+	<h4 class="dropdown-toggle dropdown" data-bs-toggle="dropdown" aria-expanded="false" id="headerNoteTitle">${notes.noteTitle}</h4>
 		<c:if test="${notes.email==Login.email }">
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 	    	<a class="dropdown-item" href="${path }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a>

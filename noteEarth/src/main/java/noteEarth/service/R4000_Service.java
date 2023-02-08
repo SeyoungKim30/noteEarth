@@ -46,6 +46,10 @@ public class R4000_Service {
 		return dao4000.selectNotes(notes).get(0);
 	}
 	
+	public void updateNotes(Notes note) {
+		dao4000.updateNotes(note);
+	}
+	
 	public Pages selectPages(Pages pages) {
 		if(pages.getPageIndex()==0&&pages.getPageCode()==null) {	//노트코드만 입력했을때
 			pages.setPageIndex(1);

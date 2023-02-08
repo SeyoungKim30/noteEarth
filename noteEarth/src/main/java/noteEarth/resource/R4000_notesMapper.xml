@@ -11,6 +11,9 @@
 		INSERT INTO notes values(#{noteCode},#{email},#{noteTitle})
 	</insert>
 	
+	<update id="updateNotes" parameterType="Notes">
+	update notes set noteTitle = #{noteTitle} where noteCode=#{noteCode}
+	</update>
 	
 	<select id="createPagesSeq" resultType="String">
 		SELECT to_char(sysdate,'YYYYMMDDHH24MISS')||pagesSeq.nextval FROM dual

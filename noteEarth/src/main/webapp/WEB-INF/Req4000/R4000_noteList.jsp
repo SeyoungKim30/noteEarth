@@ -17,7 +17,13 @@
 }
 div.card:hover{
 	color:white;
-	font-weight: bold;}
+	font-weight: bold;
+	/* border-color: rgba(70, 78, 89, 0.2);
+	border-width:0.2em;
+	border-style: inset; */
+	box-shadow: 0 0 0.4em rgba(70, 78, 89, 0.7) inset;
+	
+	}
 </style>
 
 <script>
@@ -29,8 +35,9 @@ $(function() {
 		let color_g = Math.floor(noteCode.substring(10,12)/100 * 127 +128).toString(16);
 		let color_b = Math.floor(noteCode.substring(7,9)/100 * 127 +128).toString(16);
 		let colorCode = '#'+color_r+color_g+color_b;
-		$(eachCard).css("background",colorCode)
+		$(eachCard).css("background",colorCode);
 	})
+
 })
 </script>
 
@@ -43,7 +50,7 @@ $(function() {
 <div class="cardDeck justify-content-center row row-cols-1 row-cols-sm-3 row-cols-lg-4 ">
 
 <c:forEach items="${noteList }" var="each">
-<div class="d-flex card col border-0" id="${each.noteCode }">
+<div class="d-flex card border-0 col" id="${each.noteCode }">
   <div class="card-body" style="cursor:pointer;" onclick="location.href='/noteEarth/openNote.do?noteCode=${each.noteCode }&pageIndex=1'">
     <h5 class="card-title">${each.noteTitle }</h5>
     <p class="card-text" >

@@ -60,6 +60,13 @@ public class R4000_Controller {
 		return "/WEB-INF/Req4000/R4011_noteViewer.jsp";	
 	}
 	
+	@RequestMapping("/updateNote.do")
+	@ResponseBody
+	public String updateNotes(Notes note) {
+		service.updateNotes(note);
+		return note.getNoteTitle();
+	}
+	
 	//	location.href='${path}/deleteNote.do?noteCode='+delnotecode
 	@RequestMapping("/deleteNote.do")
 	public String deleteNote(Notes note,HttpServletRequest request) {

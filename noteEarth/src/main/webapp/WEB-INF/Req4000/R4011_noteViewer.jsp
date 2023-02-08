@@ -49,6 +49,53 @@ ${pages.mainHTML}
 
 <%@include file="/WEB-INF/Req4000/R4021_deleteNote.jsp" %>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn upNoteModalBtn" data-bs-toggle="modal" data-bs-target="#updateNoteModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="updateNoteModal" tabindex="-1" aria-labelledby="updateNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateNoteModalLabel">노트 제목 변경</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="updateNoteForm" >
+      <div class="modal-body">
+      <input name="noteCode" value="${notes.noteCode }" type="hidden">
+      <input name="noteTitle" class="form-control" value="${notes.noteTitle}" id="inputNoteTitle">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">변경하기</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+
+$("#updateNoteForm").submit(function(){
+	$.ajax({
+		url:"${path }/updateNote.do",
+		type:"post",
+		data: $("#updateNoteForm").serialize(),
+		dataType: "text",
+		success:function(data){
+				$("#headerNoteTitle").text(data)
+		},
+		error:function(xhr,status,error){
+			console.log(xhr)
+			console.log(status)
+			console.log(error)
+		}
+	})
+})
+</script>
+
+
 <script>
 var thispageIndex = ${pages.pageIndex}
 
@@ -91,8 +138,7 @@ var mainkids=$('main').children()
 				data : "pageCode=${pages.pageCode}&mainHTML="+$('main').html(),
 				dataType: "text",
 				success:function(data){
-					console.log(data)
-				},
+					console.log(data)},
 				error:function(xhr,status,error){
 					console.log(xhr)
 					console.log(status)
