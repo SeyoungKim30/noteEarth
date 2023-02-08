@@ -22,7 +22,7 @@ public class R4000_Controller {
 	private R4000_Service service;
 
 	
-	  //http://localhost:6080/noteEarth/addNote.do
+	  //http://localhost:6080/noteEarth/
 	  
 	 @RequestMapping("/addNote.do") public String addNote() {
 	  return "/WEB-INF/Req4000/R4000_addnote.jsp"; 
@@ -37,9 +37,7 @@ public class R4000_Controller {
 		return "/WEB-INF/Req4000/R4000_noteList.jsp";	
 	}
 
-	 
-	
-	//http://localhost:6080/noteEarth/createNote.do
+
 	@RequestMapping("/createNote.do")
 	public String createNotes(Notes newNote,Pages newPage,Model d,HttpServletRequest request) {
 		HttpSession session =request.getSession();
@@ -51,9 +49,8 @@ public class R4000_Controller {
 	
 	@RequestMapping("/openNote.do")
 	public String openNote(Pages pages,@RequestParam(value="noteCode",required = false) String noteCode,Model d) {
-		System.out.println(pages.getPageCode());
+		
 		pages = service.selectPages(pages);	
-	System.out.println(pages);
 		if(noteCode==null) {
 			noteCode = pages.getNoteCode();
 		}
@@ -61,6 +58,16 @@ public class R4000_Controller {
 		d.addAttribute("pages",pages);
 		
 		return "/WEB-INF/Req4000/R4011_noteViewer.jsp";	
+	}
+	
+	//	location.href='${path}/deleteNote.do?noteCode='+delnotecode
+	@RequestMapping("/deleteNote.do")
+	public String deleteNote(Notes note,HttpServletRequest request) {
+		HttpSession session =request.getSession();
+		//노트 번호 받고, 그 객체에 지금 로그인된 이메일 넣어서 생성한 사람만 삭제할 수 있게
+		note.setEmail(((Member)session.getAttribute("Login")).getEmail());
+		service.deleteNotes(note);
+		return "redirect:/selectNoteList.do";
 	}
 
 	
@@ -82,7 +89,7 @@ public class R4000_Controller {
 		
 		//삭제하고 나서 앞페이지로 redirect
 		return "redirect:/openNote.do?noteCode="+prevPages.getNoteCode()+"&pageIndex="+prevPages.getPageIndex();
-	}
+	} 
 	
 	@RequestMapping("/updatePageMainHTML.do")
 	@ResponseBody

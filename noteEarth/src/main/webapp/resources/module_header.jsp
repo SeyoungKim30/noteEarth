@@ -34,11 +34,12 @@
 	<h4 class="dropdown-toggle dropdown" data-bs-toggle="dropdown" aria-expanded="false">${notes.noteTitle}</h4>
 		<c:if test="${notes.email==Login.email }">
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    	<a class="dropdown-item" href="${noteEarthurl }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a>
+	    	<a class="dropdown-item" href="${path }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a>
 	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addPageModal" id="addNewNoteBtn">다른 템플릿으로 새 페이지 생성 </a>
 	    	<c:if test="${notes.totalPageCount>1 }">
 	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delPageModal">지금 페이지 삭제</a>
 	    	</c:if>
+	    	<a class="dropdown-item delNoteModalBtn" href="#" data-bs-toggle="modal" data-bs-target="#delNoteModal" id="${notes.noteCode }">노트 삭제</a>
 		</div>
 		</c:if>
 </div>
@@ -55,7 +56,7 @@
 	<div class="col">
 		<select class="form-select form-select-sm pageSelect">
 		<c:forEach begin="1" end="${notes.totalPageCount }" varStatus="eachSt">
-		<option value="${noteEarthurl }/openNote.do?pageIndex=${eachSt.count }&noteCode=${notes.noteCode }">${eachSt.count }</option>
+		<option value="${path }/openNote.do?pageIndex=${eachSt.count }&noteCode=${notes.noteCode }">${eachSt.count }</option>
 		</c:forEach>
 		</select>
 	</div>
@@ -93,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger" onclick="location.href='${noteEarthurl}/deletePages.do?pageCode=${pages.pageCode}&pageIndex=${pages.pageIndex }&noteCode=${pages.noteCode }&tempCode=${pages.tempCode }'">페이지 삭제</button>
+        <button type="button" class="btn btn-danger" onclick="location.href='${path}/deletePages.do?pageCode=${pages.pageCode}&pageIndex=${pages.pageIndex }&noteCode=${pages.noteCode }&tempCode=${pages.tempCode }'">페이지 삭제</button>
       </div>
     </div>
   </div>

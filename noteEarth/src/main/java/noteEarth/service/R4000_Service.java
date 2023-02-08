@@ -53,6 +53,11 @@ public class R4000_Service {
 		return dao4000.selectPages(pages);
 	}
 	
+	public void deleteNotes(Notes notes) {
+		dao4000.deleteNotes(notes);
+	}
+	
+	
 	public Pages deletePages(Pages pages) {
 		//지움
 		dao4000.deletePages(pages);

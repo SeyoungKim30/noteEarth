@@ -13,8 +13,6 @@
 </head>
 
 <body>
-
-
 notes : ${notes.noteCode }<br>
  &nbsp;${notes.email }<br>
 pages: ${pages.pageIndex }<br>
@@ -27,21 +25,21 @@ pages: ${pages.pageIndex }<br>
 ${pages.mainHTML}
 </main>
 
-서버용 코드 바꿀거 c:set var="noteEarthurl" value="http://106.10.71.20:6080/noteEarth"/
+서버용 코드 바꿀거 c:set var="path" value="http://106.10.71.20:6080/noteEarth"/
 
 <div class="pagenav">
 <div>
   <ul class="pagination">
     <li class="page-item">
-      <a class="page-link previousPage" href="${noteEarthurl }/openNote.do?pageIndex=${pages.pageIndex - 1}&noteCode=${notes.noteCode }" aria-label="Previous">
+      <a class="page-link previousPage" href="${path }/openNote.do?pageIndex=${pages.pageIndex - 1}&noteCode=${notes.noteCode }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     	<c:forEach begin="1" end="${notes.totalPageCount }" varStatus="eachSt">
-   			 <li class="page-item"><a class="page-link" href="${noteEarthurl }/openNote.do?pageIndex=${eachSt.count }&noteCode=${notes.noteCode }">${eachSt.count }</a></li>
+   			 <li class="page-item"><a class="page-link" href="${path }/openNote.do?pageIndex=${eachSt.count }&noteCode=${notes.noteCode }">${eachSt.count }</a></li>
     	</c:forEach>
     <li class="page-item">
-      <a class="page-link nextPage" href="${noteEarthurl }/openNote.do?pageIndex=${pages.pageIndex + 1}&noteCode=${notes.noteCode }" aria-label="Next">
+      <a class="page-link nextPage" href="${path }/openNote.do?pageIndex=${pages.pageIndex + 1}&noteCode=${notes.noteCode }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
@@ -49,7 +47,7 @@ ${pages.mainHTML}
 </div>
 </div>
 
-
+<%@include file="/WEB-INF/Req4000/R4021_deleteNote.jsp" %>
 
 <script>
 var thispageIndex = ${pages.pageIndex}
@@ -85,7 +83,7 @@ if(thispageIndex==${notes.totalPageCount }){
 var mainkids=$('main').children()
 	mainkids.keyup(function(){
 /* 		let newhtml = $('main').html()
-		location.href="${noteEarthurl}/updatePageMainHTML.do?pageCode=${pages.pageCode}&mainHTML="+newhtml
+		location.href="${path}/updatePageMainHTML.do?pageCode=${pages.pageCode}&mainHTML="+newhtml
 		console.log(newhtml) */
 			$.ajax({
 				url:"${path}/updatePageMainHTML.do",
