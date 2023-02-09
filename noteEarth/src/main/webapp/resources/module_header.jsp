@@ -33,14 +33,17 @@
 <div class="center">
 	<h4 class="dropdown-toggle dropdown" data-bs-toggle="dropdown" aria-expanded="false" id="headerNoteTitle">${notes.noteTitle}</h4>
 		<c:if test="${notes.email==Login.email }">
-		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    	<a class="dropdown-item" href="${path }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a>
-	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addPageModal" id="addNewNoteBtn">다른 템플릿으로 새 페이지 생성 </a>
-	    	<c:if test="${notes.totalPageCount>1 }">
-	    	<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delPageModal">지금 페이지 삭제</a>
-	    	</c:if>
-	    	<a class="dropdown-item delNoteModalBtn" href="#" data-bs-toggle="modal" data-bs-target="#delNoteModal" id="${notes.noteCode }">노트 삭제</a>
-		</div>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<li><a class="dropdown-item" href="${path }/insertPages.do?noteCode=${pages.noteCode }&tempCode=${pages.tempCode }&pageIndex=${pages.pageIndex}">현재 템플릿으로 새 페이지 생성</a></li>
+		    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#addPageModal" id="addNewNoteBtn">다른 템플릿으로 새 페이지 생성 </a></li>
+		    <li><hr class="dropdown-divider"></li>
+		    	<c:if test="${notes.totalPageCount>1 }">
+			    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delPageModal">지금 페이지 삭제</a></li>
+		    	</c:if>
+		    <li><hr class="dropdown-divider"></li>
+		    <li><a class="dropdown-item upNoteModalBtn" href="#" data-bs-toggle="modal" data-bs-target="#updateNoteModal" >노트 제목 변경</a></li>
+		    <li><a class="dropdown-item delNoteModalBtn" href="#" data-bs-toggle="modal" data-bs-target="#delNoteModal" id="${notes.noteCode }">노트 삭제</a></li>
+		</ul>
 		</c:if>
 </div>
 </c:if>
@@ -78,50 +81,6 @@
 </div>
 
 </header>
-
-
-<!--delPageModal  -->
-<div class="modal fade" id="delPageModal" tabindex="-1" aria-labelledby="delPageModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="delPageModalLabel">현재 페이지 삭제</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-    <span class="text-danger">삭제한 페이지는 복구할 수 없습니다.</span><br>
-        정말 삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-danger" onclick="location.href='${path}/deletePages.do?pageCode=${pages.pageCode}&pageIndex=${pages.pageIndex }&noteCode=${pages.noteCode }&tempCode=${pages.tempCode }'">페이지 삭제</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--add Modal -->
-<div class="modal fade" id="addPageModal" tabindex="-1" aria-labelledby="addPageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addPageModalLabel">새 페이지 생성 </h1>
-      </div>
-      <div class="modal-body">
-<form class="form-group" action="insertPages.do">
-<%@include file="/resources/module_4001_chooseTemplate.jsp" %>
-<input type="hidden" name="noteCode" value="${notes.noteCode }">
-<input type="hidden" name="pageCode" value="${pages.pageCode }">
-<input type="hidden" name="pageIndex" value="${pages.pageIndex }">
-<div class="row p-4">
-<button type="button" class="col btn btn-secondary m-2" data-bs-dismiss="modal" aria-label="Close">취소</button>
-<button type="submit" class="col btn btn-primary m-2">페이지 추가</button>
-</div>
-</form>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 

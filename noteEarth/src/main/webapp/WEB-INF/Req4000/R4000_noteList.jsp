@@ -17,10 +17,6 @@
 }
 div.card:hover{
 	color:white;
-	font-weight: bold;
-	/* border-color: rgba(70, 78, 89, 0.2);
-	border-width:0.2em;
-	border-style: inset; */
 	box-shadow: 0 0 0.4em rgba(70, 78, 89, 0.7) inset;
 	
 	}

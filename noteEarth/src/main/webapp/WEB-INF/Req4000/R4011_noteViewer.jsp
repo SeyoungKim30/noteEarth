@@ -48,11 +48,8 @@ ${pages.mainHTML}
 </div>
 
 <%@include file="/WEB-INF/Req4000/R4021_deleteNote.jsp" %>
+<%@include file="/WEB-INF/Req4000/R4012_addDelPages.jsp" %>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn upNoteModalBtn" data-bs-toggle="modal" data-bs-target="#updateNoteModal">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="updateNoteModal" tabindex="-1" aria-labelledby="updateNoteModalLabel" aria-hidden="true">
@@ -69,7 +66,7 @@ ${pages.mainHTML}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">변경하기</button>
+        <button type="submit" class="btn btn-primary" >변경하기</button>
       </div>
       </form>
     </div>

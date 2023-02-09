@@ -32,7 +32,7 @@ public class R4000_Controller {
 	public String selectNoteList(Model d,HttpServletRequest request) {
 		HttpSession session =request.getSession();
 		Notes notes = new Notes();
-		notes.setEmail(((Member) session.getAttribute("Login")).getEmail());		//메일주소 임시값
+		notes.setEmail(((Member) session.getAttribute("Login")).getEmail());
 		d.addAttribute("noteList",service.selectNoteList(notes));
 		return "/WEB-INF/Req4000/R4000_noteList.jsp";	
 	}
