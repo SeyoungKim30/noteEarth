@@ -39,15 +39,26 @@
 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
 	
+	
+	<!-- 
+	jdbc.driver=oracle.jdbc.driver.OracleDriver
+	jdbc.url=jdbc:oracle:thin:@localhost:1521:xe
+	jdbc.user=scott
+	jdbc.pass=tiger
+ -->
+	
+	<context:property-placeholder location="classpath:noteEarth/resource/config"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-	<property name="username" value="scott"></property>
-	<property name="password" value="tiger"></property>
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<!-- <property name="url" value="${jdbc.urlserver}"></property> -->
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.user}"></property>
+		<property name="password" value="${jdbc.pass}"></property>
 	</bean>
 
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	
 	<property name="dataSource" ref="dataSource"></property>
 	<property name="configLocation" value="classpath:noteEarth/resource/mybatis.Spring.xml" />
 	</bean>

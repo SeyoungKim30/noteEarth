@@ -35,13 +35,12 @@ public class A1000_Service {
 	
 	public Member NE_Login(Member log) {
 		System.out.println("Sdd"+log.getSnsemail());
-
-		if(log.getEmail()==null) log.setEmail("aaaaaaaa");
-		if(log.getSnsemail()==null) {
-		if(log.getKakaoemail()==null) {log.setSnsemail(log.getGoogleemail());}
-		if(log.getGoogleemail()==null) {log.setSnsemail(log.getKakaoemail());}
+		if(log.getSnsemail()==null || log.getSnsemail().equals("")) {
+			return dao.NE_Login(log);
+		}else {
+			return dao.NE_LoginE(log);
 		}
-		return dao.NE_Login(log);
+		
 	}
 	
 	public void NE_SnsEmailPlus(Member upt) {
@@ -51,5 +50,8 @@ public class A1000_Service {
 	public int NE_UpdateInfo(Member upt) {
 		 System.out.println("S:"+upt.getEmail());
 		return dao.NE_UpdateInfo(upt);
+	}
+	public int NE_LinkSns(Member upt) {
+		return dao.NE_LinkSns(upt);
 	}
 }
